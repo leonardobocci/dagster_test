@@ -29,4 +29,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: leobocci/clockbox:latest
+          tags: leobocci/dagster_test:{{github.sha}}
