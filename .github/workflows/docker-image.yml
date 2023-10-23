@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set persistent image tag
-        run: echo "${{ github.sha }}" | sha256sum | cut -b 1-7 >> $IMAGE_TAG
+        run: rm -f $IMAGE_TAG && echo "${{ github.sha }}" | sha256sum | cut -b 1-7 >> $IMAGE_TAG
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag example_image_dagster:$IMAGE_TAG
       - name: Push Docker image to Docker Hub
