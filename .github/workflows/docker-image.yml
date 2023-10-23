@@ -7,19 +7,26 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag example_image_dagster:"${{ github.sha }}"
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
           username: leobocci
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Push Docker image to Docker Hub
-        run: docker push example_image_dagster:"${{ github.sha }}"
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: leobocci/clockbox:latest
