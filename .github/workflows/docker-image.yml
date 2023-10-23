@@ -14,12 +14,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set persistent image tag
-        run: rm -f $IMAGE_TAG && echo "${{ github.sha }}" | sha256sum | cut -b 1-7 >> $IMAGE_TAG
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag example_image_dagster:$IMAGE_TAG
+        run: docker build . --file Dockerfile --tag example_image_dagster:"${{ github.sha }}"
       - name: Push Docker image to Docker Hub
-        run: docker push example_image_dagster:$IMAGE_TAG
+        run: docker push example_image_dagster:"${{ github.sha }}"
         env:
           DOCKER_USERNAME: leobocci
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
