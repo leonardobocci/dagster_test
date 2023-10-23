@@ -17,7 +17,7 @@ jobs:
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag example_image_dagster:"${{ github.sha }}"
       - name: Push Docker image to Docker Hub
-        run: docker push example_image_dagster:"${{ github.sha }}"
+        run: docker push leobocci/example_image_dagster:"${{ github.sha }}"
         env:
           DOCKER_USERNAME: leobocci
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
