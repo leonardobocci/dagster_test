@@ -33,7 +33,3 @@ def topstories() -> None:
 
     df = pd.DataFrame(results)
     df.to_csv("data/topstories.csv")
-
-defs = Definitions(
-    assets=[topstory_ids, topstories]
-)
