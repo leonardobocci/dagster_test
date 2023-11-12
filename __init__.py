@@ -1,5 +1,5 @@
-from dagster import Definitions
+from dagster import Definitions, load_assets_from_modules
 
 defs = Definitions(
-    assets=[topstory_ids, topstories],
+    assets=load_assets_from_modules()
 )
