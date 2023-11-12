@@ -4,7 +4,7 @@ import os
 import pandas as pd  # Add new imports to the top of `assets.py`
 import requests
 
-from dagster import asset
+from dagster import asset, Definitions
 
 @asset # add the asset decorator to tell Dagster this is an asset
 def topstory_ids() -> None:
@@ -33,3 +33,7 @@ def topstories() -> None:
 
     df = pd.DataFrame(results)
     df.to_csv("data/topstories.csv")
+
+defs = Definitions(
+    assets=[topstory_ids, topstories]
+)
