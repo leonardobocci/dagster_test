@@ -8,5 +8,5 @@ dagster-user-deployments:
         pullPolicy: Always
       dagsterApiGrpcArgs:
         - "--python-file"
-        - "/example_pipe.py"
+        - "/assets/example_pipe.py"
       port: 8081
